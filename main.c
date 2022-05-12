@@ -27,7 +27,7 @@ void set_pixel_color(Image img, int px, int py, Color color) {
 }
 
 void set_pixel_color_center(Image img, int px, int py, Color color) {
-    //if (debug) printf("set_pixel: %d, %d\n", px, py);
+    //if (debug) printf("set_pixel: %d, %d\n", px,py);
     set_pixel_color(img, px+HEIGHT/2, WIDTH/2-py, color);
 }
 
@@ -72,14 +72,13 @@ void line(Image img, Color line_color, Point a, Point b) {
 
 void draw_parabola(Image img, float a, float b, float c) {
     // Assuming the formula looks like this
-    // f(x) = a(x*x) + b*x + c
+    // f(x) = a(x*x) + bx + c
     assert(a != 0);
     Color line_color = { 255, 105, 55 };
 
-    Point prev = {0,0}, curr = {0,0};
-    curr.y = 0;
+    Point prev, curr = { 0, c };
     int x = 1;
-    while(curr.y < HEIGHT/2) {
+    while(curr.y < HEIGHT/2 && curr.y > -HEIGHT/2) {
 	if (x > 1) {
 	    if (debug)
 		printf("drawing: (%f, %f) (%f, %f)\n", prev.x,prev.y,curr.x,curr.y);
