@@ -16,6 +16,8 @@ It currently can
 
 ##### Usage
 
+All variables that are meant to be changed by the user are in config.h
+
 ```
 ./build.sh && ./a.out
 ```

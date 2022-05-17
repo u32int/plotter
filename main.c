@@ -6,8 +6,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define WIDTH 600
-#define HEIGHT 800
+#include "config.h"
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
@@ -57,9 +56,6 @@ void draw_line(Image img, Color c, float ax, float ay, float bx, float by) {
 	}
     }
 }
-
-
-#define f(x) (x*x/40)
 
 void draw_eq(Image img)
 {
