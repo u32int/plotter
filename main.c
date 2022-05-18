@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <assert.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 
 #include "config.h"
@@ -14,7 +13,6 @@
 typedef uint8_t Color[3];
 typedef Color Image[HEIGHT][WIDTH];
 
-bool debug = false;
 
 void set_pixel_color(Image img, int px, int py, Color color)
 {
@@ -26,7 +24,8 @@ void set_pixel_color_center(Image img, int px, int py, Color color)
     set_pixel_color(img, px+WIDTH/2, HEIGHT/2-py, color);
 }
 
-void draw_rect(Image img, Color color, int lx, int ly, int x, int y) {
+void draw_rect(Image img, Color color, int lx, int ly, int x, int y)
+{
     for(int row = 0; row < ly; row++) {
 	for(int col = 0; col < lx; col++) {
 	    set_pixel_color(img, col+x, row+y, color);
@@ -34,11 +33,13 @@ void draw_rect(Image img, Color color, int lx, int ly, int x, int y) {
     }
 }
 
-void image_fill(Image img, Color color) {
+void image_fill(Image img, Color color)
+{
     draw_rect(img,color,WIDTH,HEIGHT,0,0);
 }
 
-void draw_line(Image img, Color c, float ax, float ay, float bx, float by) {
+void draw_line(Image img, Color c, float ax, float ay, float bx, float by)
+{
     int dx = abs(ax - bx);
     int dy = abs(ay - by);
     int index = 0;
@@ -57,10 +58,11 @@ void draw_line(Image img, Color c, float ax, float ay, float bx, float by) {
     }
 }
 
+
 void draw_eq(Image img)
 {
     Color c = { 255, 105, 55 };
-    float lx, ly;
+    float lx, ly = 0.0f;
     for(float x = -WIDTH/2; x < WIDTH/2; ++x) {
 	float y = f(x);
 	if (y > -HEIGHT/2 && y < HEIGHT/2 &&
@@ -71,6 +73,25 @@ void draw_eq(Image img)
 	}
 	lx = x; ly = y;
     } 
+}
+
+#define PI 3.14159265358979323846
+
+void draw_circle(Image img, float cx, float cy, float r)
+{
+    Color c = { 146, 255, 121 };
+    assert(r > 0);
+
+    int prev = 0;
+    float precision = 1;
+    for(float x = -r; x <= r; x += precision) {
+	int y = sqrt(r*r - x*x);
+	if (x > -r) {
+	    draw_line(img, c, (int)(x-precision)+cx, prev+cy, (int)x+cx, y+cy);
+	    draw_line(img, c, (int)(x-precision)+cx, -prev+cy, (int)x+cx, -y+cy);
+	}
+	prev = y;
+    }
 }
 
 void generate_plot_bg(Image img) {
