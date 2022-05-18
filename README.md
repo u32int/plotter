@@ -1,17 +1,6 @@
 ### Plotter
 
-Pixel by pixel xy plot generator in C.
-
-
-
-It currently can
-
-- generate a line from a to b
-
-- fill
-
-- generate a parabola
-
+Pixel by pixel xy 2d function plot generation C.
 
 
 ##### Usage
@@ -30,7 +19,12 @@ ex.
 convert test.ppm test.png
 ```
 
-##### Example output
-
-<img src= "./img/example.png"></img>
-<img src= "./img/example2.png"></img>
+#### Examples
+```
+f(x) -(x*x)/70 + 80
+```
+<img src= "./img/parabola.png"></img>
+```
+f(x) = cos(x/25)*100
+```
+<img src="./img/cos.png"></img>
