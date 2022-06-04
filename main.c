@@ -64,7 +64,7 @@ void draw_eq(Image img)
     Color c = { 255, 105, 55 };
     float lx, ly = 0.0f;
     for(float x = -WIDTH/2; x < WIDTH/2; ++x) {
-	float y = f(x);
+	float y = f(x/SCALE)*SCALE;
 	if (y > -HEIGHT/2 && y < HEIGHT/2 &&
 	    ly > -HEIGHT/2 && ly < HEIGHT/2 &&
 	    x > -WIDTH/2)
